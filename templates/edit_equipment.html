@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Edytuj sprzęt{% endblock %}
+{% block content %}
+<h2>Edytuj sprzęt</h2>
+<form method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="name" class="form-label">Nazwa sprzętu</label>
+        <input type="text" class="form-control" name="name" value="{{ equipment.name }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Opis</label>
+        <textarea class="form-control" name="description">{{ equipment.description }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="image" class="form-label">Zdjęcie</label>
+        <input type="file" class="form-control" name="image">
+        {% if equipment.image_file %}
+            <img src="{{ url_for('static', filename='images/' + equipment.image_file) }}" class="img-thumbnail mt-2" width="200">
+        {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+</form>
+{% endblock %}

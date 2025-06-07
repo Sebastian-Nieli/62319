@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Moje wypożyczenia{% endblock %}
+{% block content %}
+<h2>Twoje wypożyczenia</h2>
+{% if rentals %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Sprzęt</th>
+            <th>Status</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for rental in rentals %}
+        <tr>
+            <td>{{ rental.equipment.name }}</td>
+            <td>
+                {% if rental.status == 'Zwrócony' %}
+                    <span class="text-success">{{ rental.status }}</span>
+                {% else %}
+                    <span class="text-danger">{{ rental.status }}</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if rental.status != 'Zwrócony' %}
+                    <a href="{{ url_for('return_equipment', rental_id=rental.id) }}" class="btn btn-warning btn-sm">Zwróć</a>
+                {% else %}
+                    <span class="text-muted">Zwrócono</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Nie masz aktywnych wypożyczeń.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Szczegóły sprzętu{% endblock %}
+{% block content %}
+<h2>{{ equipment.name }}</h2>
+<img src="{{ url_for('static', filename='images/default.png') }}" class="equipment-img mb-3" alt="{{ equipment.name }}">
+<p>Status:
+    {% if equipment.available %}
+        <span class="text-success">Dostępny</span>
+    {% else %}
+        <span class="text-danger">Wypożyczony</span>
+    {% endif %}
+</p>
+{% if equipment.available %}
+    <a href="{{ url_for('rent_equipment', equipment_id=equipment.id) }}" class="btn btn-success">Wypożycz</a>
+{% endif %}
+{% endblock %}

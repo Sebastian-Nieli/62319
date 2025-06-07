@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Edytuj sprzęt{% endblock %}
+{% block content %}
+<h2>Edytuj sprzęt</h2>
+<form method="POST">
+    <div class="mb-3">
+        <label for="name" class="form-label">Nowa nazwa sprzętu</label>
+        <input type="text" class="form-control" name="name" value="{{ equipment.name }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+</form>
+{% endblock %}

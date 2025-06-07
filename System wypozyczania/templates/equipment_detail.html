@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Szczegóły sprzętu{% endblock %}
+{% block content %}
+<h2>{{ equipment.name }}</h2>
+{% if equipment.image_file %}
+    <img src="{{ url_for('static', filename='images/' + equipment.image_file) }}" class="img-fluid mb-3">
+{% endif %}
+<p>{{ equipment.description }}</p>
+{% if equipment.is_reserved %}
+    <p class="reserved">Sprzęt jest już zarezerwowany.</p>
+{% else %}
+    <form method="POST">
+        <div class="mb-3">
+            <label for="start_date" class="form-label">Data rozpoczęcia</label>
+            <input type="date" name="start_date" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="end_date" class="form-label">Data zakończenia</label>
+            <input type="date" name="end_date" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success">Zarezerwuj</button>
+    </form>
+{% endif %}
+{% endblock %}

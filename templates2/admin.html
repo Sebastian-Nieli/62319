@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Panel administratora{% endblock %}
+{% block content %}
+<h2>Panel administratora</h2>
+
+<h4 class="mt-4">Użytkownicy</h4>
+<ul class="list-group mb-4">
+    {% for user in users %}
+        <li class="list-group-item">{{ user.username }}</li>
+    {% endfor %}
+</ul>
+
+<h4>Sprzęt</h4>
+<table class="table table-bordered mb-4">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Dostępność</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in equipment %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>
+                {% if item.available %}
+                    <span class="text-success">Dostępny</span>
+                {% else %}
+                    <span class="text-danger">Wypożyczony</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h4>Wszystkie wypożyczenia</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Użytkownik</th>
+            <th>Sprzęt</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for rental in rentals %}
+        <tr>
+            <td>{{ rental.user.username }}</td>
+            <td>{{ rental.equipment.name }}</td>
+            <td>{{ rental.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Szczegóły sprzętu{% endblock %}
+{% block content %}
+<h2>{{ equipment.name }}</h2>
+{% if equipment.image_file %}
+    <img src="{{ url_for('static', filename='images/' + equipment.image_file) }}" class="img-fluid" alt="{{ equipment.name }}">
+{% endif %}
+<p>{{ equipment.description }}</p>
+
+{% if equipment.is_reserved and reservation %}
+    <div class="alert alert-warning">
+        <h4>Sprzęt jest zarezerwowany</h4>
+        <p>Rezerwacja od: {{ reservation.start_date.strftime('%Y-%m-%d') }} do {{ reservation.end_date.strftime('%Y-%m-%d') }}</p>
+        <p>Zarezerwowany przez użytkownika: {{ reservation.user.username }}</p>
+
+        {% if current_user.is_authenticated and (current_user.id == reservation.user_id or current_user.is_admin) %}
+            <form action="{{ url_for('cancel_reservation', reservation_id=reservation.id) }}" method="post" onsubmit="return confirm('Czy na pewno chcesz anulować tę rezerwację?');">
+                <button type="submit" class="btn btn-danger">Anuluj rezerwację</button>
+            </form>
+        {% endif %}
+    </div>
+{% else %}
+    <h4>Zarezerwuj sprzęt</h4>
+    <form method="post">
+        <div class="mb-3">
+            <label for="start_date" class="form-label">Data początku</label>
+            <input type="date" name="start_date" id="start_date" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="end_date" class="form-label">Data końca</label>
+            <input type="date" name="end_date" id="end_date" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Zarezerwuj</button>
+    </form>
+{% endif %}
+<a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Powrót</a>
+{% endblock %}
