@@ -50,6 +50,6 @@ Aplikacja umożliwia:
 1. **Sklonuj repozytorium**
 ```bash
 git clone https://github.com/Sebastian-Nieli/62319.git
-cd
+cd 62319
 
 
