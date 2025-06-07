@@ -51,5 +51,26 @@ Aplikacja umożliwia:
 ```bash
 git clone https://github.com/Sebastian-Nieli/62319.git
 cd 62319
+```
 
+2. **Utwórz środowisko wirtualne i je aktywuj**
 
+Windows:
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+3. **Zainstaluj wymagane biblioteki**
+
+```bash
+pip install -r requirements.txt
+```
+4. **Uruchom aplikację**
+
+```bash
+python app.py
+```
+5. **Otwórz przeglądarkę i przejdź do**
+
+http://localhost:5000
